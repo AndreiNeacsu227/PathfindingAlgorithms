@@ -8,7 +8,7 @@ public class Graph {
     public void addSquare(){
         for(int i = 0; i < gr.length; i++){
             for(int j =0; j<gr[i].length;j++){
-                int x = r.nextInt(2);
+                int x = r.nextInt(5);
 
                 if ((i==0) && (j==0)){
                     gr[i][j]="S";
@@ -16,11 +16,11 @@ public class Graph {
                 else if ((i==4) && (j==4)){
                     gr[i][j]="F";
                 }
-                else if (x == 0){
+                else if (x != 0){
                     gr[i][j]="O";
 
                 }
-                else if (x != 0){
+                else if (x == 0){
                     gr[i][j]= "X";
                 }
             }

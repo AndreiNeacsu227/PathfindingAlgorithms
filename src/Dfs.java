@@ -4,15 +4,13 @@ public class Dfs {
 
     Stack<String> st = new Stack<>();
 
-    boolean find = false;
     int x = 0;
     int y = 0;
     int vertex = 0;
 
     public String [][] DfsAlg(String [][] gra) {
-        String [][] inGraph = new String[5][5];
 
-
+        Stack<String> st1 = new Stack<>();
 
         for (int i = 1; i <= 4; i++) {
                 switch (i) {
@@ -21,22 +19,30 @@ public class Dfs {
                         if (gra[x][y + 1] == ("O")) {
                             vertex++;
                             gra[x][y + 1] = Integer.toString(vertex);
-                            st.push(gra[x][y + 1]);
+                            st1.push(gra[x][y + 1]);
                             break;
-                        }else{
+                        }else if (gra[x][y + 1].equals("F")){
+                            System.out.println("S-a gasit drumul");
+                            System.exit(0);
+                        }
+                        else{
                             break;
                         }
                         }catch(ArrayIndexOutOfBoundsException e){
                             break;
                         }
+
                     case 2:
                         try{
                         if (gra[x][y - 1] == "O") {
                             vertex++;
                             gra[x][y - 1] = Integer.toString(vertex);
-                            st.push(Integer.toString(vertex));
+                            st1.push(Integer.toString(vertex));
                             break;
-                        } else{
+                        } else if (gra[x][y - 1].equals("F")){
+                            System.out.println("S-a gasit drumul");
+                            System.exit(0);
+                        }else{
                             break;
                         }
                         } catch(ArrayIndexOutOfBoundsException e){
@@ -48,9 +54,12 @@ public class Dfs {
                         if (gra[x - 1][y] == "O") {
                             vertex++;
                             gra[x - 1][y] = Integer.toString(vertex);
-                            st.push(Integer.toString(vertex));
+                            st1.push(Integer.toString(vertex));
                             break;
-                        }else{
+                        }else if (gra[x - 1][y].equals("F")){
+                            System.out.println("S-a gasit drumul");
+                            System.exit(0);
+                        } else{
                         break;}
                         } catch (ArrayIndexOutOfBoundsException e){
                             break;
@@ -61,9 +70,12 @@ public class Dfs {
                         if (gra[x + 1][y] == "O") {
                             vertex++;
                             gra[x + 1][y] = Integer.toString(vertex);
-                            st.push(Integer.toString(vertex));
+                            st1.push(Integer.toString(vertex));
                             break;
-                        }else {
+                        }else if (gra[x + 1][y].equals("F")){
+                            System.out.println("S-a gasit drumul");
+                            System.exit(0);
+                        } else {
                             break;}
                         }
                         catch (ArrayIndexOutOfBoundsException e){
@@ -72,19 +84,24 @@ public class Dfs {
                 }
             }
 
+        while(!st1.empty()){
+            st.push(st1.pop());
+        }
+
+
         String ul = st.pop();
 
         for(int i = 0; i < gra.length; i++){
             System.out.println("\n");
             for(int j =0; j<gra[i].length;j++) {
 
-                if (gra[i][j] == ul) {
+                if (gra[i][j].equals(ul)) {
                     x = i;
                     y = j;
 
-
                 }
-                System.out.print(gra[i][j] + "  ");
+                String formatat= String.format("%" + -7 + "s", gra[i][j]);
+                System.out.print(formatat);
 
 
             }
